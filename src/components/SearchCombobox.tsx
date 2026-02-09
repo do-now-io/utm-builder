@@ -31,7 +31,7 @@ export function SearchCombobox({
         );
 
   return (
-    <Combobox value={selected} onChange={onSelect} onClose={() => setQuery("")}>
+    <Combobox value={selected} onChange={onSelect} onClose={() => setQuery("")} immediate>
       <div className="relative">
         <div className="relative">
           <ComboboxInput

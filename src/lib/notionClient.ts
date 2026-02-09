@@ -45,18 +45,16 @@ export async function fetchNotionLinks(): Promise<NotionLink[]> {
 
   return data.results
     .map((page) => {
-      const nameProperty = Object.values(page.properties).find(
-        (p) => p.type === "title"
-      );
+      const titreProperty = page.properties["Titre"];
       const urlProperty = Object.values(page.properties).find(
         (p) => p.type === "url"
       );
 
       const name =
-        nameProperty?.title?.map((t) => t.plain_text).join("") ?? "";
-      const url = urlProperty?.url ?? "";
+        titreProperty?.rich_text?.map((t) => t.plain_text).join("") ?? "";
+      const url = urlProperty?.url ?? "https://example.com";
 
       return { id: page.id, name, url };
     })
-    .filter((link) => link.url !== "");
+    .filter((link) => link.name !== "");
 }

@@ -38,6 +38,7 @@ export function UtmCombobox({
         value={value}
         onChange={(v) => onChange(v ?? "")}
         onClose={() => setQuery("")}
+        immediate
       >
         <div className="relative flex-1">
           <ComboboxInput
