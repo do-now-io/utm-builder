@@ -4,7 +4,8 @@ import { UtmCombobox } from "./components/UtmCombobox";
 import { UrlPreview } from "./components/UrlPreview";
 import { CopyButton } from "./components/CopyButton";
 import { useNotionLinks } from "./hooks/useNotionLinks";
-import { utmOptions, type UtmKey } from "./config/utmOptions";
+import { useNotionUtm } from "./hooks/useNotionUtm";
+import type { UtmKey } from "./config/utmOptions";
 import { buildUtmUrl } from "./lib/buildUrl";
 import type { NotionLink } from "./lib/notionClient";
 
@@ -18,6 +19,7 @@ const utmKeys: UtmKey[] = [
 
 function App() {
   const { links, loading, error, retry } = useNotionLinks();
+  const { utmOptions, loading: utmLoading } = useNotionUtm();
   const [selectedLink, setSelectedLink] = useState<NotionLink | null>(null);
   const [utmValues, setUtmValues] = useState<Record<UtmKey, string>>({
     utm_source: "",
@@ -84,15 +86,22 @@ function App() {
             <h2 className="text-xs font-semibold tracking-wide text-white uppercase">
               Paramètres UTM
             </h2>
-            {utmKeys.map((key) => (
-              <UtmCombobox
-                key={key}
-                label={key}
-                options={utmOptions[key]}
-                value={utmValues[key]}
-                onChange={(v) => handleUtmChange(key, v)}
-              />
-            ))}
+            {utmLoading ? (
+              <div className="flex items-center justify-center py-4">
+                <div className="h-5 w-5 animate-spin rounded-full border-2 border-[#65FFB2] border-t-transparent" />
+                <span className="ml-3 text-sm text-white/50">Chargement des UTM...</span>
+              </div>
+            ) : (
+              utmKeys.map((key) => (
+                <UtmCombobox
+                  key={key}
+                  label={key}
+                  options={utmOptions[key] ?? []}
+                  value={utmValues[key]}
+                  onChange={(v) => handleUtmChange(key, v)}
+                />
+              ))
+            )}
           </section>
 
           {/* Divider */}

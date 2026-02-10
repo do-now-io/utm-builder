@@ -10,7 +10,7 @@ function ColorizedUrl({ url }: { url: string }) {
 
     return (
       <>
-        <span className="text-[#65FFB2]">{baseUrl}</span>
+        <span className="text-[#FFBE4D]">{baseUrl}</span>
         {params.map(([key, value], i) => (
           <span key={key}>
             <span className="text-white/40">{i === 0 ? "?" : "&"}</span>

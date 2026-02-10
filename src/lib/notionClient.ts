@@ -49,3 +49,47 @@ export async function fetchNotionLinks(): Promise<NotionLink[]> {
     })
     .filter((link) => link.name !== "");
 }
+
+export interface UtmEntry {
+  name: string;
+  utmType: string;
+}
+
+export async function fetchUtmOptions(): Promise<Record<string, string[]>> {
+  const response = await fetch("/api/notion-utm", { method: "POST" });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch UTM options: ${response.status}`);
+  }
+
+  const data: NotionQueryResponse = await response.json();
+
+  const grouped: Record<string, string[]> = {
+    utm_source: [],
+    utm_medium: [],
+    utm_campaign: [],
+    utm_content: [],
+    utm_term: [],
+  };
+
+  for (const page of data.results) {
+    const props = page.properties;
+
+    const nomProp = props["Nom"];
+    const name =
+      nomProp?.title?.map((t) => t.plain_text).join("") ?? "";
+
+    const utmTypeProp = props["UTM-Type"] as { type: string; select?: { name: string } | null };
+    const utmType = utmTypeProp?.select?.name ?? "";
+
+    if (name && utmType && utmType in grouped) {
+      grouped[utmType].push(name);
+    }
+  }
+
+  for (const key of Object.keys(grouped)) {
+    grouped[key].sort((a, b) => a.localeCompare(b));
+  }
+
+  return grouped;
+}

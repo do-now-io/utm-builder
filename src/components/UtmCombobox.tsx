@@ -7,6 +7,14 @@ import {
 } from "@headlessui/react";
 import { useState } from "react";
 
+const tooltips: Record<string, string> = {
+  utm_source: "L'origine : identifie la source d'origine du clic (ex: linkedin, emailing, offline). C'est la base de vos rapports d'acquisition.",
+  utm_medium: "Le vecteur : définit la nature technique du lien (ex: social, email, qr). Attention : GA4 utilise ce champ pour classer le trafic. Une erreur (ex: mail au lieu de email) rend la donnée illisible.",
+  utm_campaign: "L'intention : regroupe les clics sous un objectif stratégique (2026-02_k8s_dd). Permet de mesurer le succès d'une opération/campagne sur plusieurs canaux.",
+  utm_content: "Le déclencheur : identifie l'élément précis cliqué (comment, signature, mail_n1). Utile pour l'A/B testing et l'optimisation.",
+  utm_term: "Le mot-clé : réservé exclusivement au Search Payant (Ads). Ne jamais utiliser pour du contenu organique ou des emails.",
+};
+
 interface UtmComboboxProps {
   label: string;
   options: readonly string[];
@@ -31,8 +39,16 @@ export function UtmCombobox({
 
   return (
     <div className="flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3">
-      <label className="w-32 shrink-0 text-sm font-medium text-white">
+      <label className="flex w-36 shrink-0 items-center gap-1.5 text-sm font-medium text-white">
         {label}
+        <span className="group relative cursor-help text-white/40 hover:text-white/70 transition-colors">
+          <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span className="pointer-events-none absolute bottom-full left-0 mb-2 w-64 rounded-lg bg-[#7253FF] px-3 py-2 text-xs leading-relaxed text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100 z-20">
+            {tooltips[label]}
+          </span>
+        </span>
       </label>
       <Combobox
         value={value}
