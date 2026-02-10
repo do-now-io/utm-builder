@@ -26,16 +26,7 @@ interface NotionQueryResponse {
 }
 
 export async function fetchNotionLinks(): Promise<NotionLink[]> {
-  const databaseId = import.meta.env.VITE_NOTION_DATABASE_ID;
-  if (!databaseId) {
-    throw new Error("VITE_NOTION_DATABASE_ID is not configured");
-  }
-
-  const response = await fetch("/api/notion-proxy", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ databaseId }),
-  });
+  const response = await fetch("/api/notion-proxy", { method: "POST" });
 
   if (!response.ok) {
     throw new Error(`Failed to fetch Notion data: ${response.status}`);
