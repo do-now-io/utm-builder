@@ -41,7 +41,7 @@ function App() {
       <div className="mx-auto w-full max-w-xl">
         {/* Header */}
         <h1 className="mb-8 text-center text-2xl font-bold text-gray-900">
-          UTM Builder
+          DoNow -UTM Builder
         </h1>
 
         <div className="space-y-6 rounded-xl bg-white p-6 shadow-sm sm:p-8">
