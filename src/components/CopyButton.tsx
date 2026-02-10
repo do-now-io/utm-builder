@@ -30,7 +30,7 @@ export function CopyButton({ url }: CopyButtonProps) {
     <button
       onClick={handleCopy}
       disabled={!url}
-      className="w-full cursor-pointer rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:ring-2 focus:ring-blue-500/20 focus:outline-none disabled:cursor-not-allowed disabled:opacity-40"
+      className="w-full cursor-pointer rounded-xl bg-[#65FFB2] px-6 py-3 text-sm font-bold text-[#004F28] shadow-sm transition-all hover:bg-[#7dffbf] hover:shadow-[0_0_20px_rgba(101,255,178,0.25)] focus:ring-2 focus:ring-[#65FFB2]/30 focus:outline-none disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/30 disabled:shadow-none"
     >
       {copied ? "Copié !" : "Copier le lien"}
     </button>

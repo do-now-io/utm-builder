@@ -37,32 +37,32 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-8 sm:py-12">
+    <div className="min-h-screen bg-[#004F28] px-4 py-8 sm:py-12">
       <div className="mx-auto w-full max-w-xl">
         {/* Header */}
-        <h1 className="mb-8 text-center text-2xl font-bold text-gray-900">
-          DoNow -UTM Builder
+        <h1 className="mb-8 text-center text-2xl font-bold text-white">
+          UTM Builder
         </h1>
 
-        <div className="space-y-6 rounded-xl bg-white p-6 shadow-sm sm:p-8">
+        <div className="space-y-6 rounded-2xl bg-white/10 p-6 shadow-lg ring-1 ring-white/10 backdrop-blur-sm sm:p-8">
           {/* Search section */}
           <section>
-            <h2 className="mb-3 text-sm font-medium text-gray-700">
+            <h2 className="mb-3 text-xs font-semibold tracking-wide text-white uppercase">
               Lien de destination
             </h2>
             {loading ? (
               <div className="flex items-center justify-center py-8">
-                <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
-                <span className="ml-3 text-sm text-gray-500">
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#65FFB2] border-t-transparent" />
+                <span className="ml-3 text-sm text-white/50">
                   Chargement des liens...
                 </span>
               </div>
             ) : error ? (
-              <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-center">
-                <p className="mb-2 text-sm text-red-700">{error}</p>
+              <div className="rounded-lg border border-red-400/30 bg-red-500/10 p-4 text-center">
+                <p className="mb-2 text-sm text-red-300">{error}</p>
                 <button
                   onClick={retry}
-                  className="cursor-pointer text-sm font-medium text-red-600 underline hover:text-red-800"
+                  className="cursor-pointer text-sm font-medium text-red-300 underline hover:text-red-200"
                 >
                   Réessayer
                 </button>
@@ -76,9 +76,12 @@ function App() {
             )}
           </section>
 
+          {/* Divider */}
+          <div className="h-px bg-white/10" />
+
           {/* UTM Parameters */}
           <section className="space-y-3">
-            <h2 className="text-sm font-medium text-gray-700">
+            <h2 className="text-xs font-semibold tracking-wide text-white uppercase">
               Paramètres UTM
             </h2>
             {utmKeys.map((key) => (
@@ -91,6 +94,9 @@ function App() {
               />
             ))}
           </section>
+
+          {/* Divider */}
+          <div className="h-px bg-white/10" />
 
           {/* Preview */}
           <section>

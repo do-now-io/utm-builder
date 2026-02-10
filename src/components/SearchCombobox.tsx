@@ -35,12 +35,12 @@ export function SearchCombobox({
       <div className="relative">
         <div className="relative">
           <ComboboxInput
-            className="w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-10 text-sm text-gray-900 placeholder-gray-400 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+            className="w-full rounded-xl border border-white/15 bg-white/10 py-3 pl-10 pr-10 text-sm text-white placeholder-white/40 outline-none transition-all focus:border-[#65FFB2]/50 focus:ring-2 focus:ring-[#65FFB2]/20"
             placeholder="Rechercher un lien..."
             displayValue={(link: NotionLink | null) => link?.name ?? ""}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40">
             <svg
               className="h-5 w-5"
               fill="none"
@@ -57,7 +57,7 @@ export function SearchCombobox({
           </span>
           <ComboboxButton className="absolute inset-y-0 right-0 flex items-center pr-3">
             <svg
-              className="h-5 w-5 text-gray-400"
+              className="h-5 w-5 text-white/40"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -72,18 +72,18 @@ export function SearchCombobox({
           </ComboboxButton>
         </div>
 
-        <ComboboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-sm shadow-lg ring-1 ring-black/5">
+        <ComboboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-xl border border-white/10 bg-[#003d1f] p-1 text-sm shadow-xl">
           {filtered.length === 0 ? (
-            <div className="px-4 py-3 text-gray-500">Aucun lien trouvé.</div>
+            <div className="px-4 py-3 text-white/50">Aucun lien trouvé.</div>
           ) : (
             filtered.map((link) => (
               <ComboboxOption
                 key={link.id}
                 value={link}
-                className="cursor-pointer select-none px-4 py-3 data-[focus]:bg-blue-50"
+                className="cursor-pointer select-none rounded-lg px-4 py-3 transition-colors data-[focus]:bg-white/10"
               >
-                <div className="font-medium text-gray-900">{link.name}</div>
-                <div className="truncate text-xs text-gray-500">
+                <div className="font-medium text-white">{link.name}</div>
+                <div className="truncate text-xs text-white/40">
                   {link.url}
                 </div>
               </ComboboxOption>
